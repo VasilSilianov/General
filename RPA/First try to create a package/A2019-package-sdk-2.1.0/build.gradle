@@ -23,7 +23,7 @@ plugins {
 configure(allprojects){
 	
 	apply plugin: 'com.github.johnrengelman.shadow'
-	apply plugin: "com.automationanywhere.command-codegen"
+//	apply plugin: "com.automationanywhere.command-codegen"
 	
 	ext {
 		groupName = 'com.automationanywhere'
@@ -61,13 +61,13 @@ configure(allprojects){
 
 	}
 	
-	packageJson{
-		artifactName = project.name
-		group = "$groupName"
-		author = ""
-	}
+//	packageJson{
+//		artifactName = project.name
+//		group = "$groupName"
+//		author = ""
+//	}
 	
-	jar.dependsOn commandCodeGen
+//	jar.dependsOn commandCodeGen
 	
 	shadowJar {
 		baseName = project.name
