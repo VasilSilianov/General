@@ -1,19 +1,14 @@
 package com.automationanywhere.botcomand;
 
 
-import com.automationanywhere.botcommand.data.Value;
 import com.automationanywhere.botcommand.data.impl.NumberValue;
-import com.automationanywhere.botcommand.data.impl.StringValue;
 import com.automationanywhere.botcommand.exception.BotCommandException;
 import com.automationanywhere.commandsdk.annotations.*;
-import com.automationanywhere.commandsdk.annotations.rules.GreaterThan;
 import com.automationanywhere.commandsdk.annotations.rules.NotEmpty;
-import com.automationanywhere.commandsdk.annotations.rules.NotEquals;
-import com.automationanywhere.commandsdk.i18n.Messages;
-import com.automationanywhere.commandsdk.i18n.MessagesFactory;
 import com.automationanywhere.commandsdk.model.DataType;
 
 import static com.automationanywhere.commandsdk.model.AttributeType.NUMBER;
+import static com.automationanywhere.commandsdk.model.AttributeType.TEXT;
 
 
 //BotCommand makes a class eligible for being considered as an action.
@@ -35,28 +30,29 @@ public class MathModule {
     @Execute
     public NumberValue action(
             //Idx 1 would be displayed first, with a text box for entering the value.
-            @Idx(index = "1", type = NUMBER)
+            @Idx(index = "1", type = TEXT)
             //UI labels.
             @Pkg(label = "[[RPAMathModule.firstInt.label]]")
             //Ensure that a validation error is thrown when the value is null.
             @NotEmpty
-                    int firstInt,
+                    String firstInt,
 
-            @Idx(index = "2", type = NUMBER)
+            @Idx(index = "2", type = TEXT)
             @Pkg(label = "[[RPAMathModule.secondInt.label]]")
-           // @NotEquals("0")
             @NotEmpty
-                    int secondInt) {
+                    String secondInt) {
 
         //Internal validation, to disallow empty strings. No null check needed as we have NotEmpty on firstString.
-        if (firstInt==0)
+        int x= Integer.parseInt(firstInt);
+        int y= Integer.parseInt(secondInt);
+        if (x==0)
             throw new BotCommandException("First int is equal to Zero");
 
-        if (secondInt==0)
+        if (y==0)
             throw new BotCommandException("First int is equal to Zero");
 
         //Business logic
-        int result = firstInt%secondInt;
+        int result = y%x;
 
         //Return StringValue.
         return new NumberValue(result);
