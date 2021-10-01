@@ -6,7 +6,9 @@ import com.automationanywhere.botcommand.data.impl.NumberValue;
 import com.automationanywhere.botcommand.data.impl.StringValue;
 import com.automationanywhere.botcommand.exception.BotCommandException;
 import com.automationanywhere.commandsdk.annotations.*;
+import com.automationanywhere.commandsdk.annotations.rules.GreaterThan;
 import com.automationanywhere.commandsdk.annotations.rules.NotEmpty;
+import com.automationanywhere.commandsdk.annotations.rules.NotEquals;
 import com.automationanywhere.commandsdk.i18n.Messages;
 import com.automationanywhere.commandsdk.i18n.MessagesFactory;
 import com.automationanywhere.commandsdk.model.DataType;
@@ -42,20 +44,21 @@ public class MathModule {
 
             @Idx(index = "2", type = NUMBER)
             @Pkg(label = "[[RPAMathModule.secondInt.label]]")
+           // @NotEquals("0")
             @NotEmpty
                     int secondInt) {
 
         //Internal validation, to disallow empty strings. No null check needed as we have NotEmpty on firstString.
-        if ("".equals(firstString.trim()))
-            throw new BotCommandException(MESSAGES.getString("emptyInputString", "firstString"));
+        if (firstInt==0)
+            throw new BotCommandException("First int is equal to Zero");
 
-        if ("".equals(secondString.trim()))
-            throw new BotCommandException(MESSAGES.getString("emptyInputString", "secondString"));
+        if (secondInt==0)
+            throw new BotCommandException("First int is equal to Zero");
 
         //Business logic
-        String result = firstString + secondString;
+        int result = firstInt%secondInt;
 
         //Return StringValue.
-        return new StringValue(result);
+        return new NumberValue(result);
     }
 }
