@@ -1,0 +1,11 @@
+{
+	"label": "Read from .msg file",
+	"description": "Extracts the information of .msg file",
+	"division.label": "Modular division",
+	"division.description": "return the reminder",
+	"division.node_label": "firstString % secondString",
+	"division.return_label": "Assign the output to variable",
+	"division.return_label_description": "",
+	"division.firstInt.label": "First Number",
+	"division.secondInt.label": "Second Number"
+}
