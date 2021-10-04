@@ -1,9 +1,13 @@
 import com.automationanywhere.botcomand.MathModule;
 import com.automationanywhere.botcommand.data.impl.NumberValue;
+import com.automationanywhere.botcommand.exception.BotCommandException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import static org.testng.Assert.assertThrows;
+
 public class TestModularDivision {
+
     @Test
     public void TestReturnCorrectValue(){
         //conditions
@@ -66,16 +70,17 @@ public class TestModularDivision {
 
     @Test
     public void firstInEqualZero(){
-        //conditions
-        String firstInt = "0";
-        String secondInt = "3";
+        assertThrows(BotCommandException.class, () -> {
+            MathModule mathModule = new MathModule();
+            mathModule.action("0","3");
+        });
+    }
 
-        //Create instance of MathModule
-        MathModule mathModule = new MathModule();
-        //Invoke
-        NumberValue output =mathModule.action(firstInt,secondInt);
-
-        //Assert
-        Assert.assertNotEquals(output.getAsDouble(),2.0);
+    @Test
+    public void secondInEqualZero(){
+        assertThrows(BotCommandException.class, () -> {
+            MathModule mathModule = new MathModule();
+            mathModule.action("3","0");
+        });
     }
 }
