@@ -35,7 +35,6 @@ public class JavaDatatypes {
             } catch (Exception e) {
                 System.out.println(sInput + " can't be fitted anywhere.");
             }
-
         }
     }
 }
